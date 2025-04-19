@@ -1,0 +1,13 @@
+beautifulsoup4>=4.12.3
+polars
+fastexcel
+thefuzz
+openpyxl
+tabulate
+streamlit
+sqlalchemy
+langchain_experimental
+langchain_openai 
+
+#ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+#llama-index-vector-stores-duckdb 0.2.0 requires duckdb<0.11.0,>=0.10.1, but you have duckdb 1.1.1 which is incompatible.
