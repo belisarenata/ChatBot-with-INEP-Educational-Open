@@ -20,6 +20,33 @@ run dataframe_parsing/create_registration_data_dataframes.py to create your db f
 
 run dataframe_parsing/split_data_by_education_level.py to populate the db with actual data 
 
+If you're not sure how to use the debbuger, here's an example of a config to be added to vscode's launch.json file in order to run the current file: 
+
+    {
+        "name": "Python Debugger: Current File",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${file}",
+        "console": "integratedTerminal",
+    },
+
+## Running the app 
+
+Run 'streamlit run app/app.py' or add the following config to run it from the debbuger on vscode or adapt it as needed:
+
+    {
+        "name": "Streamlit",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "streamlit",
+        "args": [
+                "run",
+                "app/app.py",
+        ],
+    }
+
+
+
 ## Some comments about coding style
 
 When choosing between concision or performance over readability, I always pick readability.
