@@ -13,13 +13,19 @@ Use your own db file or create one with inep educational data following the next
 ## Recriating the db
 
 well, if you insist... 
-run data_collection/collect_data.py and be patient. Lots of downloads there. I highly suggest using a debugger to check if progress is smooth. 
-run dataframe_parsing/create_registration_data_dataframes.py to create your db file with only the regitration data
+
+run data_collection/collect_data.py and be patient. Lots of downloads there. I highly suggest using a debugger to check if the progress is smooth. 
+
+run dataframe_parsing/create_registration_data_dataframes.py to create your db file with the registration data
+
 run dataframe_parsing/split_data_by_education_level.py to populate the db with actual data 
 
 ## Some comments about coding style
 
 When choosing between concision or performance over readability, I always pick readability.
+
 This is the first time I'm using polars, sqlite, langchain and basically every lib except for beautifulsoup4.
+
 This code is far from optimal, especially data collection and data parsing. Coming from pandas, polars require a new way of thinking that I'm not used to (yet!). 
-This code was written so anyone could understand and/or as what I could do in the moment :shrug:
+
+This code was written so anyone could understand it and/or what I could do in the moment :shrug:
