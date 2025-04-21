@@ -7,10 +7,10 @@ import shutil
 # TODO: FIX extract zipped files. Rebase at 3a.m. is not always a good ideia, who could imagine?
 # TODO: add parametrization by year
 
-root_files_path = "./files"
 
 
 def extract_zipped_files(indicators_names: str | None = None):
+    root_files_path = "files"
     file_format = "xlsx"
 
     downloaded_files_path = f"{root_files_path}/downloaded_data"
@@ -19,7 +19,7 @@ def extract_zipped_files(indicators_names: str | None = None):
     # List all files inside folders, indexed by indicator
     files_by_indicators = {
         folder: os.listdir(f"{downloaded_files_path}/{folder}")
-        for folder in sub_folders
+        for folder in sub_folders if not folder.startswith('.')
     }
 
     for indicator, file_names in files_by_indicators.items():
@@ -74,12 +74,13 @@ def create_file_on_new_format(
 ):
 
     # Being overzealous, I'm always using O.G. file as input
-    root_files_path = "./files/xlsx"
-    sub_folders = os.listdir(root_files_path)
+    root_files_path = "files"
+    xlsx_files_path = f"{root_files_path}/xlsx"
+    sub_folders = os.listdir(xlsx_files_path)
 
     # List all files inside folders, indexed by indicator
     files_by_indicators = {
-        folder: os.listdir(f"{root_files_path}/{folder}") for folder in sub_folders
+        folder: os.listdir(f"{xlsx_files_path}/{folder}") for folder in sub_folders
     }
 
     for indicator, file_names in files_by_indicators.items():
@@ -87,10 +88,10 @@ def create_file_on_new_format(
             continue
 
         # If destiny folder doesn't exists, creates it
-        os.makedirs(f"./files/dataframe_parquet/{indicator}", exist_ok=True)
-        os.makedirs(f"./files/csv/{indicator}", exist_ok=True)
+        os.makedirs(f"{root_files_path}/dataframe_parquet/{indicator}", exist_ok=True)
+        os.makedirs(f"{root_files_path}/csv/{indicator}", exist_ok=True)
 
-        indicator_path = f"{root_files_path}/{indicator}"
+        indicator_path = f"{xlsx_files_path}/{indicator}"
         for file_name in file_names:
             dataframe = pl.DataFrame()
             # Get only numerical values from file
@@ -104,17 +105,17 @@ def create_file_on_new_format(
             if dataframe.is_empty:
                 if recreate_parquet:
                     dataframe.write_parquet(
-                        f"./files/dataframe_parquet/{indicator}/{year}.parquet"
+                        f"{root_files_path}/dataframe_parquet/{indicator}/{year}.parquet"
                     )
 
                 if recreate_csv_files:
-                    dataframe.write_csv(f"./files/csv/{indicator}/{year}.csv")
+                    dataframe.write_csv(f"{root_files_path}/csv/{indicator}/{year}.csv")
 
 
 def execute(
-    extract_xlsx_from_zipped_files: bool | None = False,
+    extract_xlsx_from_zipped_files: bool | None = True,
     recreate_dataframes_parquet: bool | None = True,
-    recreate_csv_files: bool | None = True,
+    recreate_csv_files: bool | None = False,
     indicators_names: str | None = None,
 ):
     if extract_xlsx_from_zipped_files:
@@ -122,7 +123,7 @@ def execute(
 
     if recreate_dataframes_parquet or recreate_csv_files:
         create_file_on_new_format(
-            indicators_names, recreate_dataframes_parquet, recreate_csv_files
+            indicators_names, recreate_csv_files, recreate_dataframes_parquet
         )
     print("Done")
 

@@ -22,7 +22,7 @@ def create_and_concat_registration_data():
     categorical_indicators_n_by_name = mappers.NO_CATEGORICAL_INDICATORS
     non_leveled_indicator = mappers.SINGLE_VALUE_INDICATOR
 
-    root_files_path = "./files/dataframe_parquet"
+    root_files_path = "files/dataframe_parquet"
     sub_folders = os.listdir(root_files_path)
 
     # TODO: Figure out what to do with this.
@@ -140,7 +140,7 @@ def create_and_concat_registration_data():
         # This dataframe is harder to write step by step due to file format. Each "category" (i.e. reproval, approval or dropout) is sequentially listed.
         # My computer has no RAM to handle parsing 12kk lines to database 
         # That's why I'm "gambiarrando" this ):) 
-        if indicator == Indicator.REND.value:
+        if indicator == Indicator.REND.value and not indicator_dataframe.is_empty():
             indicator_categories = indicator_dict.keys()
                             
             indicator_dataframe = indicator_dataframe.group_by(["SCHOOL_CODE", "YEAR", "etapa", "classe"]).agg([

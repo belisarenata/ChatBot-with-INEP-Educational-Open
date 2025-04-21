@@ -7,3 +7,7 @@ cache
 *.log
 *.DS_STORE
 *.db
+*.csv
+*.xlsx
+*.zip
+*.parquet

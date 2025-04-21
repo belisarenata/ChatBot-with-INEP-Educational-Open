@@ -12,7 +12,7 @@ Use your own db file or create one with inep educational data following the next
 
 ## Recriating the db
 
-well, if you insist.
+well, if you insist... 
 run data_collection/collect_data.py and be patient. Lots of downloads there. I highly suggest using a debugger to check if progress is smooth. 
 run dataframe_parsing/create_registration_data_dataframes.py to create your db file with only the regitration data
 run dataframe_parsing/split_data_by_education_level.py to populate the db with actual data 

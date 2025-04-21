@@ -91,11 +91,11 @@ def execute(
             for k, v in file_download_link_by_indicator_by_year.items()
             if not callable(v)
         }
-        with open("./file_download_link_by_indicator_by_year", "wb") as file:
+        with open("./data_collection/file_download_link_by_indicator_by_year", "wb") as file:
             pickle.dump(serializable_dict, file)
         return file_download_link_by_indicator_by_year
     try:
-        with open("./file_download_link_by_indicator_by_year", "rb") as file:
+        with open("./data_collection/file_download_link_by_indicator_by_year", "rb") as file:
             file_download_link_by_indicator_by_year = pickle.load(file)
         return file_download_link_by_indicator_by_year
     except Exception:

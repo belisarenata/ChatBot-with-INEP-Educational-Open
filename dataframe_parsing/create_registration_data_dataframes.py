@@ -7,7 +7,7 @@ import mappers
 
 
 def create_and_concat_registration_data():
-    files_path = "./files/dataframe_parquet/Adequação da Formação Docente"
+    files_path = "files/dataframe_parquet/Adequação da Formação Docente"
     years = os.listdir(files_path)
     registration_dataframe = pl.DataFrame()
 

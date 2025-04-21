@@ -10,6 +10,8 @@ downloaded_files_path = "./files/downloaded_data"
 
 def download_data(indicators_name: str | None = None):
     file_download_link_by_indicator_by_year = crawler.execute()
+    # by default, the crawler will not re-request pages since they only change yearly. if you want to re-request, uncomment the line below
+    #file_download_link_by_indicator_by_year = crawler.execute(re_request_pages=True, redownload_technical_notes) 
     for indicator, info in file_download_link_by_indicator_by_year.items():
         if indicators_name and indicator not in indicators_name:
             continue
@@ -25,7 +27,7 @@ def download_data(indicators_name: str | None = None):
                 open(filename, "wb").write(response.content)
 
             except Exception as e:
-                print(indicator, year, e)
+                continue
 
 
 def execute(
