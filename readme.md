@@ -4,7 +4,7 @@ Install requirements (pip install -r requirements.txt)
 
 ## Create a .env 
 
-On the root file, create a .env file and add your on a var named OPEN_AI_KEY 
+At the root folder, create a .env file and add your on a var named OPEN_AI_KEY 
 
 ## DB
 
